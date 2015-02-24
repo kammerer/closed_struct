@@ -15,8 +15,8 @@ describe ClosedStruct do
     first = ClosedStruct.new(:a => :b)
     second = ClosedStruct.new(:a => :b)
 
-    expect(first == second).to be_true
-    expect(first.eql?(second)).to be_true
+    expect(first == second).to be_truthy
+    expect(first.eql?(second)).to be_truthy
     expect(first.hash).to eq(second.hash)
   end
 
@@ -24,8 +24,8 @@ describe ClosedStruct do
     first = ClosedStruct.new(:a => :b)
     second = ClosedStruct.new(:a => :c)
 
-    expect(first == second).to be_false
-    expect(first.eql?(second)).to be_false
+    expect(first == second).to be_falsy
+    expect(first.eql?(second)).to be_falsy
     expect(first.hash).not_to eq(second.hash)
   end
 
@@ -50,5 +50,9 @@ describe ClosedStruct do
   it "does not allow duplicate definitions" do
     expect { ClosedStruct.new(:a => :b, "a" => :b) }.
       to raise_error(ArgumentError)
+  end
+
+  it "can be created from nil" do
+    expect { ClosedStruct.new(nil) }.not_to raise_error
   end
 end
