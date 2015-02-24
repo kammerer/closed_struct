@@ -55,4 +55,11 @@ describe ClosedStruct do
   it "can be created from nil" do
     expect { ClosedStruct.new(nil) }.not_to raise_error
   end
+
+  it "allows access via []" do
+    input = {:a => :b}
+    object = ClosedStruct.new(input)
+
+    expect(object[:a]).to eq(:b)
+  end
 end
